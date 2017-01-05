@@ -3,6 +3,11 @@ dependency-reduced-pom.xml
 .project
 .settings/
 
+#Build targets
+target/
+/target
+*/target
+
 *.class
 
 # Mobile Tools for Java (J2ME)
