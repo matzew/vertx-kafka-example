@@ -1,3 +1,8 @@
+dependency-reduced-pom.xml
+.classpath
+.project
+.settings/
+
 *.class
 
 # Mobile Tools for Java (J2ME)
