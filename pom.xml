@@ -11,7 +11,7 @@
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-core</artifactId>
-            <version>3.4.0-SNAPSHOT</version>
+            <version>${version.vertx}</version>
         </dependency>
         <dependency>
             <groupId>io.vertx</groupId>
@@ -27,7 +27,7 @@
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-unit</artifactId>
-            <version>3.4.0-SNAPSHOT</version>
+            <version>${version.vertx}</version>
             <scope>test</scope>
         </dependency>
 
@@ -90,5 +90,9 @@
 
         </plugins>
     </build>
+
+    <properties>
+        <version.vertx>3.4.0.Beta1</version.vertx>
+    </properties>
 
 </project>
