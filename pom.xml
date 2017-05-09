@@ -16,7 +16,7 @@
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-kafka-client</artifactId>
-            <version>3.4.0-SNAPSHOT</version>
+            <version>${version.vertx}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -92,7 +92,7 @@
     </build>
 
     <properties>
-        <version.vertx>3.4.0.Beta1</version.vertx>
+        <version.vertx>3.4.1</version.vertx>
     </properties>
 
 </project>

@@ -17,7 +17,6 @@
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
-import io.vertx.kafka.client.consumer.ConsumerOptions;
 import io.vertx.kafka.client.consumer.KafkaReadStream;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -38,14 +37,14 @@ public class SimpleKafkaConsumer extends AbstractVerticle {
       config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
       config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
 
-      consumer = KafkaReadStream.create(vertx, new ConsumerOptions().setWorkerThread(false), config);
+      consumer = KafkaReadStream.create(vertx, config);
 
       consumer.handler(record -> {
           System.out.println("received message: " + record.value());
 
       });
 
-      consumer.subscribe(Collections.singleton("messages"));
+      consumer.subscribe(Collections.singleton("websocket_bridge"));
 
       // we are ready w/ deployment
       fut.complete();
