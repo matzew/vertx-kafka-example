@@ -92,7 +92,7 @@
     </build>
 
     <properties>
-        <version.vertx>3.4.1</version.vertx>
+        <version.vertx>3.5.2.CR2</version.vertx>
     </properties>
 
 </project>
