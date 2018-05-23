@@ -13,15 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- package net.wessendorf.vertx;
+package net.wessendorf.vertx;
 
-import io.vertx.core.AbstractVerticle;
+import io.reactivex.Flowable;
 import io.vertx.core.Future;
 import io.vertx.kafka.client.consumer.KafkaReadStream;
+import io.vertx.reactivex.core.AbstractVerticle;
+import io.vertx.reactivex.kafka.client.consumer.KafkaConsumer;
+import io.vertx.reactivex.kafka.client.consumer.KafkaConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 
-import java.util.Collections;
+import java.util.Map;
 import java.util.Properties;
 
 public class SimpleKafkaConsumer extends AbstractVerticle {
@@ -31,21 +34,21 @@ public class SimpleKafkaConsumer extends AbstractVerticle {
   @Override
   public void start(Future<Void> fut) {
 
-      Properties config = new Properties();
+      Map config = new Properties();
       config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "172.17.0.7:9092");
-      config.put(ConsumerConfig.GROUP_ID_CONFIG, "mygroup_2");
+      config.put(ConsumerConfig.GROUP_ID_CONFIG, "my_group");
       config.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
       config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
       config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
 
-      consumer = KafkaReadStream.create(vertx, config);
+      Flowable<KafkaConsumerRecord> stream = KafkaConsumer.<String, String>create(vertx, config)
+              .subscribe("testy")
+              .toFlowable();
 
-      consumer.handler(record -> {
-          System.out.println("received message: " + record.value());
-
-      });
-
-      consumer.subscribe(Collections.singleton("testy"));
+      stream
+              .subscribe(data -> {
+                  System.out.println("DA.......... " + data.value());
+              });
 
       // we are ready w/ deployment
       fut.complete();
