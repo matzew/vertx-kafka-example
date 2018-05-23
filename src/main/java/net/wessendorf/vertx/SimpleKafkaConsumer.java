@@ -32,8 +32,9 @@ public class SimpleKafkaConsumer extends AbstractVerticle {
   public void start(Future<Void> fut) {
 
       Properties config = new Properties();
-      config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "172.17.0.3:9092");
-      config.put(ConsumerConfig.GROUP_ID_CONFIG, "mygroup2");
+      config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "172.17.0.7:9092");
+      config.put(ConsumerConfig.GROUP_ID_CONFIG, "mygroup_2");
+      config.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
       config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
       config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
 
@@ -44,7 +45,7 @@ public class SimpleKafkaConsumer extends AbstractVerticle {
 
       });
 
-      consumer.subscribe(Collections.singleton("websocket_bridge"));
+      consumer.subscribe(Collections.singleton("testy"));
 
       // we are ready w/ deployment
       fut.complete();
